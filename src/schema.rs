@@ -1,4 +1,12 @@
 table! {
+    courses (courses_id) {
+        courses_id -> Int4,
+        teacher_id -> Nullable<Int4>,
+        school_module_id -> Nullable<Int4>,
+    }
+}
+
+table! {
     participant (participant_id) {
         participant_id -> Int4,
         mail -> Nullable<Varchar>,
@@ -23,9 +31,10 @@ table! {
     }
 }
 
-joinable!(participant -> school_module (school_module_id));
+joinable!(courses -> teacher (teacher_id));
 
 allow_tables_to_appear_in_same_query!(
+    courses,
     participant,
     school_module,
     teacher,

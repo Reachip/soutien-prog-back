@@ -39,7 +39,7 @@ CREATE TABLE if not exists courses (
 );
 
 CREATE TABLE if not exists participant (
-	participant_id INTEGER NOT NULL DEFAULT nextval('participant_id_seq') PRIMARY KEY,
+	participant_id SERIAL PRIMARY KEY,
 	mail varchar(64),
 	school_module_id INTEGER,
 	constraint fk_school_module FOREIGN KEY (school_module_id) REFERENCES school_module(school_module_id),
