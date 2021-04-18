@@ -13,6 +13,39 @@
 --
 -- SELECT diesel_manage_updated_at('users');
 -- ```
+
+CREATE TABLE if not exists school_module (
+	school_module_id SERIAL PRIMARY KEY,
+	module_name VARCHAR(50),
+	module_number VARCHAR(10),
+	UNIQUE(school_module_id)
+);
+
+CREATE TABLE if not exists teacher (
+	teacher_id SERIAL PRIMARY KEY,
+	username varchar(50),
+	mail varchar(64),
+	pwd varchar(200),
+	UNIQUE(teacher_id)
+);
+
+CREATE TABLE if not exists courses (
+	courses_id SERIAL PRIMARY KEY,
+	teacher_id INTEGER,
+	school_module_id INTEGER,
+	constraint fk_teacher FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id),
+	constraint fk_school_module FOREIGN KEY (school_module_id) REFERENCES school_module(school_module_id),
+	UNIQUE(courses_id)
+);
+
+CREATE TABLE if not exists participant (
+	participant_id INTEGER NOT NULL DEFAULT nextval('participant_id_seq') PRIMARY KEY,
+	mail varchar(64),
+	school_module_id INTEGER,
+	constraint fk_school_module FOREIGN KEY (school_module_id) REFERENCES school_module(school_module_id),
+	UNIQUE(participant_id)
+);
+
 CREATE OR REPLACE FUNCTION diesel_manage_updated_at(_tbl regclass) RETURNS VOID AS $$
 BEGIN
     EXECUTE format('CREATE TRIGGER set_updated_at BEFORE UPDATE ON %s
