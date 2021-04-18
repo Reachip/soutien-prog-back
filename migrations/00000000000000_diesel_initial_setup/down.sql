@@ -5,7 +5,7 @@
 DROP FUNCTION IF EXISTS diesel_manage_updated_at(_tbl regclass);
 DROP FUNCTION IF EXISTS diesel_set_updated_at();
 
-DROP TABLE IF EXISTS teacher;
-DROP TABLE IF EXISTS participant;   
-DROP TABLE IF EXISTS school_module;
 DROP TABLE IF EXISTS courses;
+DROP TABLE IF EXISTS teacher;
+DROP TABLE IF EXISTS participant; 
+DROP TABLE IF EXISTS school_module;
