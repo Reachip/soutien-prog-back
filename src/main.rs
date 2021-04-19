@@ -1,4 +1,6 @@
 mod handlers;
+mod database;
+mod crud;
 
 use handlers::hello;
 
@@ -13,5 +15,6 @@ fn router() -> gotham::router::Router {
 }
 
 fn main() {
+    let database = database::PgDatabase::new("lol".to_owned());
     gotham::start("127.0.0.1:8080", || Ok(router()));
 }
