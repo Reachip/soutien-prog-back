@@ -1,19 +1,16 @@
 use diesel::pg::PgConnection;
+use diesel::Connection;
 
 pub struct PgDatabase {
-    connection: PgConnection    
+    pub connection: PgConnection
 }
 
 
 impl PgDatabase {
     pub fn new(database_url: String) -> Self {
         Self {
-            connection: PgConnection::establish(&database_url)
+            connection: PgConnection::establish(&database_url).unwrap()
         }
-    }
-
-    pub fn getConnection(&self) -> PgConnection {
-        &self.connection
     }
 }
 

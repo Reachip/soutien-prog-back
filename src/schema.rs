@@ -1,33 +1,33 @@
 table! {
     courses (courses_id) {
         courses_id -> Int4,
-        teacher_id -> Nullable<Int4>,
-        school_module_id -> Nullable<Int4>,
+        teacher_id -> Int4,
+        school_module_id -> Int4,
     }
 }
 
 table! {
     participant (participant_id) {
         participant_id -> Int4,
-        mail -> Nullable<Varchar>,
-        school_module_id -> Nullable<Int4>,
+        mail -> Varchar,
+        school_module_id -> Int4,
     }
 }
 
 table! {
     school_module (school_module_id) {
         school_module_id -> Int4,
-        module_name -> Nullable<Varchar>,
-        module_number -> Nullable<Varchar>,
+        module_name -> Varchar,
+        module_number -> Varchar,
     }
 }
 
 table! {
     teacher (teacher_id) {
         teacher_id -> Int4,
-        username -> Nullable<Varchar>,
-        mail -> Nullable<Varchar>,
-        pwd -> Nullable<Varchar>,
+        username -> Varchar,
+        mail -> Varchar,
+        pwd -> Varchar,
     }
 }
 
