@@ -18,7 +18,7 @@ CREATE TABLE if not exists school_module (
 	school_module_id SERIAL PRIMARY KEY,
 	module_name VARCHAR(50) NOT NULL,
 	module_number VARCHAR(10) NOT NULL,
-	UNIQUE(school_module_id)
+	UNIQUE(module_name, module_number)
 );
 
 CREATE TABLE if not exists teacher (
@@ -26,7 +26,7 @@ CREATE TABLE if not exists teacher (
 	username varchar(50) NOT NULL,
 	mail varchar(64) NOT NULL,
 	pwd varchar(200) NOT NULL,
-	UNIQUE(teacher_id)
+	UNIQUE(username, mail)
 );
 
 CREATE TABLE if not exists courses (
@@ -34,16 +34,15 @@ CREATE TABLE if not exists courses (
 	teacher_id INTEGER NOT NULL,
 	school_module_id INTEGER NOT NULL,
 	constraint fk_teacher FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id),
-	constraint fk_school_module FOREIGN KEY (school_module_id) REFERENCES school_module(school_module_id),
-	UNIQUE(courses_id)
+	constraint fk_school_module FOREIGN KEY (school_module_id) REFERENCES school_module(school_module_id)
 );
 
-CREATE TABLE if not exists participant (
-	participant_id SERIAL PRIMARY KEY,
-	mail varchar(64) NOT NULL,
-	school_module_id INTEGER NOT NULL,
-	constraint fk_school_module FOREIGN KEY (school_module_id) REFERENCES school_module(school_module_id),
-	UNIQUE(participant_id)
+CREATE TABLE if not exists participant
+(
+    participant_id   SERIAL PRIMARY KEY,
+    mail             varchar(64) NOT NULL,
+    school_module_id INTEGER     NOT NULL,
+    constraint fk_school_module FOREIGN KEY (school_module_id) REFERENCES school_module (school_module_id)
 );
 
 CREATE OR REPLACE FUNCTION diesel_manage_updated_at(_tbl regclass) RETURNS VOID AS $$

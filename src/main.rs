@@ -26,11 +26,21 @@ fn router() -> gotham::router::Router {
 
 fn main() {
     let database = database::PgDatabase::new("postgres://postgres:@localhost/soutienprog".to_owned());
-    let participant_crud = ParticipantCRUD::new(database);
 
-    let insert = vec!(
-       NewParticipant::new("r@gmail.com".to_owned(), 0));
-    println!("{:?}", participant_crud.insert(insert).unwrap());
+    let participant_crud = ParticipantCRUD::new(&database);
+    let school_module_crud = SchoolModuleCRUD::new(&database);
+
+    let insert_participant = vec!(
+       NewParticipant::new("r@gmail.com".to_owned(), 1)
+    );
+
+
+    let insert_school_module = vec!(
+      NewSchoolModule::new("Réseau".to_string(), "M2102".to_string())
+    );
+
+    println!("{:?}", school_module_crud.insert(insert_school_module).unwrap());
+    println!("{:?}", participant_crud.insert(insert_participant).unwrap());
 
     println!("Server running");
     gotham::start("127.0.0.1:8080", || Ok(router()));

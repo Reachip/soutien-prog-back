@@ -18,6 +18,21 @@ pub struct Participant {
 }
 
 
+#[derive(Queryable, Insertable, Debug)]
+#[table_name="school_module"]
+pub struct SchoolModule {
+    school_module_id: i32,
+    module_name: String,
+    module_number: String
+}
+
+#[derive(Insertable, Debug)]
+#[table_name="school_module"]
+pub struct NewSchoolModule {
+    module_name: String,
+    module_number: String
+}
+
 #[derive(Insertable, Debug)]
 #[table_name="participant"]
 pub struct NewParticipant {
@@ -25,12 +40,27 @@ pub struct NewParticipant {
     school_module_id: i32
 }
 
+#[derive(Insertable, Debug)]
+#[table_name="courses"]
+pub struct NewCourses {
+    school_module_id: i32
+}
+
+impl  NewSchoolModule {
+    pub fn new(module_name: String, module_number: String) -> Self {
+        Self { module_name, module_number }
+    }
+}
+
+impl NewCourses {
+    pub fn new(school_module_id: i32) -> Self {
+        Self { school_module_id }
+    }
+}
+
 impl NewParticipant {
     pub fn new(mail: String, school_module_id: i32) -> Self {
-        Self {
-            mail,
-            school_module_id
-        }
+        Self { mail, school_module_id }
     }
 }
 
@@ -43,11 +73,3 @@ impl Participant {
         }
     }
 }
-
-/*
-#[derive(Queryable)]
-pub struct SchoolModule {
-    school_module_id: i32
-    module_name: String,
-    module_number: String
-}*/
