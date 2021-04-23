@@ -1,6 +1,6 @@
 use crate::schema::*;
 use diesel::Queryable;
-use diesel::types::Timestamp;
+use chrono::NaiveDateTime;
 
 #[derive(Queryable, Insertable)]
 #[table_name = "courses"]
@@ -8,8 +8,8 @@ pub struct Courses {
     courses_id: i32,
     teacher_id: i32,
     school_module_id: i32,
-    starting_at: Timestamp,
-    ending_at: Timestamp
+    starting_at: NaiveDateTime,
+    ending_at: NaiveDateTime
 }
 
 #[derive(Queryable, Insertable, Debug)]
@@ -47,8 +47,8 @@ pub struct NewParticipant {
 #[table_name = "courses"]
 pub struct NewCourses {
     school_module_id: i32,
-    starting_at: Timestamp,
-    ending_at: Timestamp
+    starting_at: NaiveDateTime,
+    ending_at: NaiveDateTime
 }
 
 impl NewSchoolModule {
@@ -58,7 +58,7 @@ impl NewSchoolModule {
 }
 
 impl NewCourses {
-    pub fn new(school_module_id: i32, starting_at: Timestamp, ending_at: Timestamp) -> Self {
+    pub fn new(school_module_id: i32, starting_at: NaiveDateTime, ending_at: NaiveDateTime) -> Self {
         Self { school_module_id, starting_at, ending_at }
     }
 }

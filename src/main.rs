@@ -1,5 +1,6 @@
 #[macro_use]
 extern crate diesel;
+extern crate chrono;
 
 mod handlers;
 mod database;
@@ -16,7 +17,6 @@ use diesel::Insertable;
 use crate::schema::participant::dsl::participant;
 use gotham::hyper::header::Values;
 use diesel::query_builder::ValuesClause;
-
 
 fn router() -> gotham::router::Router {
     gotham::router::builder::build_simple_router(|route| {
@@ -39,8 +39,8 @@ fn main() {
         NewSchoolModule::new("Réseau".to_string(), "M2102".to_string())
     );
 
-    println!("{:?}", school_module_crud.insert(insert_school_module).unwrap());
-    println!("{:?}", participant_crud.insert(insert_participant).unwrap());
+    school_module_crud.insert(insert_school_module).unwrap();
+    participant_crud.insert(insert_participant).unwrap();
 
     println!("Server running");
     gotham::start("127.0.0.1:8080", || Ok(router()));
