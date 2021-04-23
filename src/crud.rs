@@ -8,7 +8,7 @@ use crate::schema;
 use crate::schema::courses::dsl::courses;
 use crate::schema::school_module::dsl::school_module;
 
-pub struct ParticipantCRUD <'a> {
+pub struct ParticipantCRUD<'a> {
     database: &'a PgDatabase
 }
 
@@ -16,13 +16,13 @@ pub struct CoursesCRUD<'a> {
     database: &'a PgDatabase
 }
 
-pub struct SchoolModuleCRUD <'a> {
+pub struct SchoolModuleCRUD<'a> {
     database: &'a PgDatabase
 }
 
 
-impl <'a> SchoolModuleCRUD <'a> {
-    pub fn new(database: &'a PgDatabase) -> Self where Self : Sized {
+impl<'a> SchoolModuleCRUD<'a> {
+    pub fn new(database: &'a PgDatabase) -> Self where Self: Sized {
         Self { database }
     }
 
@@ -32,13 +32,11 @@ impl <'a> SchoolModuleCRUD <'a> {
             .get_result::<SchoolModule>(&self.database.connection)
     }
 
-    fn delete(&self, values: Vec<NewSchoolModule>) {
-
-    }
+    fn delete(&self, values: Vec<NewSchoolModule>) {}
 }
 
-impl  <'a> CoursesCRUD  <'a> {
-    pub fn new(database: &'a PgDatabase) -> Self where Self : Sized {
+impl<'a> CoursesCRUD<'a> {
+    pub fn new(database: &'a PgDatabase) -> Self where Self: Sized {
         Self { database }
     }
 
@@ -48,13 +46,11 @@ impl  <'a> CoursesCRUD  <'a> {
             .get_result::<Courses>(&self.database.connection)
     }
 
-    fn delete(&self, values: Vec<NewCourses>) {
-
-    }
+    fn delete(&self, values: Vec<NewCourses>) {}
 }
 
-impl  <'a> ParticipantCRUD <'a> {
-    pub fn new(database: &'a PgDatabase) -> Self where Self : Sized {
+impl<'a> ParticipantCRUD<'a> {
+    pub fn new(database: &'a PgDatabase) -> Self where Self: Sized {
         Self { database }
     }
 
@@ -64,7 +60,5 @@ impl  <'a> ParticipantCRUD <'a> {
             .get_result::<Participant>(&self.database.connection)
     }
 
-    fn delete(&self, values: Vec<NewParticipant>) {
-
-    }
+    fn delete(&self, values: Vec<NewParticipant>) {}
 }

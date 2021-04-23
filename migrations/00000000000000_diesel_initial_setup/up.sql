@@ -33,7 +33,9 @@ CREATE TABLE if not exists courses (
 	courses_id SERIAL PRIMARY KEY,
 	teacher_id INTEGER NOT NULL,
 	school_module_id INTEGER NOT NULL,
-	constraint fk_teacher FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id),
+	starting_at TIMESTAMP NOT NULL,
+    ending_at TIMESTAMP NOT NULL,
+    constraint fk_teacher FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id),
 	constraint fk_school_module FOREIGN KEY (school_module_id) REFERENCES school_module(school_module_id)
 );
 

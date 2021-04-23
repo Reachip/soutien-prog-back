@@ -3,6 +3,8 @@ table! {
         courses_id -> Int4,
         teacher_id -> Int4,
         school_module_id -> Int4,
+        starting_at -> Timestamp,
+        ending_at -> Timestamp,
     }
 }
 

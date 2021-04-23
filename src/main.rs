@@ -7,7 +7,7 @@ mod crud;
 mod model;
 mod schema;
 
-use handlers::hello;
+use handlers::courses;
 use crud::*;
 use model::*;
 use gotham::router::builder::DrawRoutes;
@@ -20,7 +20,7 @@ use diesel::query_builder::ValuesClause;
 
 fn router() -> gotham::router::Router {
     gotham::router::builder::build_simple_router(|route| {
-        route.get("/hello").to(hello::say_hello);
+        //route.get("/courses/add").to(courses::create_courses());
     })
 }
 
@@ -31,12 +31,12 @@ fn main() {
     let school_module_crud = SchoolModuleCRUD::new(&database);
 
     let insert_participant = vec!(
-       NewParticipant::new("r@gmail.com".to_owned(), 1)
+        NewParticipant::new("r@gmail.com".to_owned(), 1)
     );
 
 
     let insert_school_module = vec!(
-      NewSchoolModule::new("Réseau".to_string(), "M2102".to_string())
+        NewSchoolModule::new("Réseau".to_string(), "M2102".to_string())
     );
 
     println!("{:?}", school_module_crud.insert(insert_school_module).unwrap());
