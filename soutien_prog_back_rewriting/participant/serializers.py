@@ -12,5 +12,5 @@ class ParticipantSerializer(serializers.ModelSerializer):
         model = Participant
         fields = ["course", "mail", "name"]
 
-    def create(self, validated_data):
-        return super().create(validated_data)
+
+    
