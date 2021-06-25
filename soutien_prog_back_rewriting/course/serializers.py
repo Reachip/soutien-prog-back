@@ -22,7 +22,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ["course_name", "description", "school_module", "teacher", "ending_at", "starting_at"]
+        fields = ["id", "course_name", "description", "school_module", "teacher", "ending_at", "starting_at"]
 
     def create(self, validated_data):
         starting_at, ending_at = (
