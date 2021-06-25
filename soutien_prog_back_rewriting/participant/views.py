@@ -13,7 +13,7 @@ class ParticipantViewSet(ModelViewSet):
     def get_permissions(self):
         permission_classes = []
 
-        if self.action == "read":
+        if self.action == "list" or self.action == "retrieve":
             permission_classes = [IsAuthenticated]
 
         return [permission() for permission in permission_classes]
