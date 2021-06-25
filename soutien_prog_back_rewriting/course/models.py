@@ -4,6 +4,7 @@ from schoolmodule.models import SchoolModule
 
 
 class Course(models.Model):
+    course_name = models.CharField(max_length=80)
     description = models.CharField(max_length=255)
     starting_at = models.DateTimeField()
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
