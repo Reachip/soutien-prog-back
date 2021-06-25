@@ -4,6 +4,18 @@ from .models import Course
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    teacher = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='username'
+    )
+
+    school_module = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='module_name'
+    )
+
     class Meta:
         model = Course
         fields = ["description", "school_module", "teacher", "ending_at", "starting_at"]
