@@ -1,19 +1,23 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from .models import Course
+from schoolmodule.models import SchoolModule
 
 
 class CourseSerializer(serializers.ModelSerializer):
     teacher = serializers.SlugRelatedField(
         many=False,
-        read_only=True,
-        slug_field='username'
+        read_only=False,
+        slug_field='username',
+        queryset=User.objects.all()
     )
 
     school_module = serializers.SlugRelatedField(
         many=False,
-        read_only=True,
-        slug_field='module_name'
+        read_only=False,
+        slug_field='module_name',
+        queryset=SchoolModule.objects.all()
     )
 
     class Meta:
