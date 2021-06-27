@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,16 +85,20 @@ WSGI_APPLICATION = "soutien_prog_back_rewriting.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+DATABASES['default'] =  dj_database_url.config()
+
+"""
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "soutienprog",
         "USER": "postgres",
         "PASSWORD": " ",
-        "HOST": "0.0.0.0",
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }
+"""
 
 
 # Password validation
