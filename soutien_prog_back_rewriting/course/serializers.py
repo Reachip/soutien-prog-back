@@ -22,7 +22,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ["id", "course_name", "description", "school_module", "teacher", "ending_at", "starting_at", "link"]
+        fields = ["id", "course_name", "description", "school_module", "teacher", "ending_at", "starting_at", "link_to"]
 
     def create(self, validated_data):
         starting_at, ending_at = (
@@ -38,7 +38,8 @@ class CourseSerializer(serializers.ModelSerializer):
                 "La date de début ne peut pas être supérieur à la date de fin. Les dates ont êtés inversées"
             )
 
-        link = validated_data["link"]
+        link = validated_data["link_to"]
+        
         disc, zoom, teams, meet = (
             "https://discord.gg/",
             "https://us05web.zoom.us/",
@@ -47,7 +48,7 @@ class CourseSerializer(serializers.ModelSerializer):
         )
 
         
-        if not link.startswith(disc) or link.startswith(zoom) or link.startswith(teams) or link.startswith(meet):
+        if not link.startswith(disc) and not link.startswith(zoom) and not link.startswith(teams) and not link.startswith(meet):
             raise ValidationError(
                 "Lien vers la visioconférence invalide"
             )
