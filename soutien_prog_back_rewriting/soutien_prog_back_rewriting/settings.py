@@ -84,16 +84,29 @@ WSGI_APPLICATION = "soutien_prog_back_rewriting.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ["DB_DATABASE"],
-        "USER": os.environ["DB_USER"],
-        "PASSWORD": os.environ["DB_PASSWORD"],
-        "HOST": os.environ["DB_HOST"],
-        "PORT": "5432",
+if os.environ.get("DJANGO_MODE") == "dev":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "soutienprog",
+            "USER": "postgres",
+            "PASSWORD": " ",
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
     }
-}
+
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": os.environ["DB_ENGINE"],
+            "NAME": os.environ["DB_DATABASE"],
+            "USER": os.environ["DB_USER"],
+            "PASSWORD": os.environ["DB_PASSWORD"],
+            "HOST": os.environ["DB_HOST"],
+            "PORT": "5432",
+        }
+    }
 
 
 
