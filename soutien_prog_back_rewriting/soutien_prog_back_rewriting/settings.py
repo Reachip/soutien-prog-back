@@ -109,7 +109,6 @@ else:
     }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -131,13 +130,23 @@ AUTH_PASSWORD_VALIDATORS = [
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
-]
+if os.environ.get("DJANGO_MODE") == "dev":
+    CORS_ORIGIN_WHITELIST = [
+        "http://localhost:3000",
+    ]
 
-CORS_ORIGIN_REGEX_WHITELIST = [
-    "http://localhost:3000",
-]
+    CORS_ORIGIN_REGEX_WHITELIST = [
+        "http://localhost:3000",
+    ]
+
+else:
+    CORS_ORIGIN_WHITELIST = [
+        "https://soutienprog-acy.netlify.app/",
+    ]
+
+    CORS_ORIGIN_REGEX_WHITELIST = [
+        "https://soutienprog-acy.netlify.app/",
+    ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -157,7 +166,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
