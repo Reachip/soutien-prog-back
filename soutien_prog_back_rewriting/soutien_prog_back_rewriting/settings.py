@@ -84,7 +84,7 @@ WSGI_APPLICATION = "soutien_prog_back_rewriting.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if os.environ.get("DJANGO_MODE") == "dev":
+if os.environ.get("DJANGO_MODE"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
@@ -130,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_CREDENTIALS = True
 
-if os.environ.get("DJANGO_MODE") == "dev":
+if os.environ.get("DJANGO_MODE"):
     CORS_ORIGIN_WHITELIST = [
         "http://localhost:3000",
         "https://soutienprog-acy.netlify.app"
