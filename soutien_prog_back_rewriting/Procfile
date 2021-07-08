@@ -1,2 +1,1 @@
-release: python manage.py migrate
 web: gunicorn soutien_prog_back_rewriting.wsgi
