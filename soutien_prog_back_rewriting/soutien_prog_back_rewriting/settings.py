@@ -133,19 +133,21 @@ CORS_ALLOW_CREDENTIALS = True
 if os.environ.get("DJANGO_MODE") == "dev":
     CORS_ORIGIN_WHITELIST = [
         "http://localhost:3000",
+        "https://soutienprog-acy.netlify.app"
     ]
 
     CORS_ORIGIN_REGEX_WHITELIST = [
         "http://localhost:3000",
+        "https://soutienprog-acy.netlify.app"
     ]
 
 else:
     CORS_ORIGIN_WHITELIST = [
-        "https://soutienprog-acy.netlify.app/",
+        "https://soutienprog-acy.netlify.app",
     ]
 
     CORS_ORIGIN_REGEX_WHITELIST = [
-        "https://soutienprog-acy.netlify.app/",
+        "https://soutienprog-acy.netlify.app",
     ]
 
 # Internationalization
