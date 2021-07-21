@@ -86,7 +86,7 @@ WSGI_APPLICATION = "soutien_prog_back_rewriting.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if os.environ.get("DJANGO_MODE"):
+if os.environ.get("DJANGO_MODE").upper() == "DEV":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
