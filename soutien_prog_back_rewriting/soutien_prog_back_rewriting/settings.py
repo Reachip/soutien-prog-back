@@ -51,6 +51,7 @@ MIDDLEWARE_CLASSES = [
 ]
 
 MIDDLEWARE = [
+    "soutien_prog_back_rewriting.middleware.set_cookie_jwt.SetJWTOnCookieHttpOnly",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
