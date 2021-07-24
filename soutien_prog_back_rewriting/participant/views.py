@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from soutien_prog_back_rewriting.permissions import IsAuthenticatedWithJWTInCookie
 
 from .models import Participant
 from .serializers import ParticipantSerializer
@@ -14,6 +14,6 @@ class ParticipantViewSet(ModelViewSet):
         permission_classes = []
 
         if self.action == "list" or self.action == "retrieve":
-            permission_classes = [IsAuthenticated]
+            permission_classes = [IsAuthenticatedWithJWTInCookie]
 
         return [permission() for permission in permission_classes]
