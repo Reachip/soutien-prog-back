@@ -1,0 +1,1 @@
+from .is_authenticated_with_jwt_in_cookie import IsAuthenticatedWithJWTInCookie
