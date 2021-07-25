@@ -1,4 +1,6 @@
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenVerifySerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework.serializers import Serializer
+
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -20,7 +22,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
-class CustomTokenVerifySerializer(TokenVerifySerializer):
+class CustomTokenVerifySerializer(Serializer):
     def validate(self, attrs):
         request = self.context['request']
         token = request.COOKIES.get("soutienprogtokenaccess")
