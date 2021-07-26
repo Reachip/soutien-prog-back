@@ -18,7 +18,11 @@ from django.urls import path
 from django.urls.conf import include
 
 from rest_framework_simplejwt import views as jwt_views
-from .views import CustomTokenObtainPairView, TokenVerifyViewWithCookie
+from .views import (
+    CustomTokenObtainPairView,
+    TokenVerifyViewWithCookie,
+    LogoutWithCookie,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -29,6 +33,7 @@ urlpatterns = [
                 path("auth/", CustomTokenObtainPairView().as_view()),
                 path("refresh/", jwt_views.TokenRefreshView().as_view()),
                 path("verify/", TokenVerifyViewWithCookie().as_view()),
+                path("logout/", LogoutWithCookie().as_view()),
                 path("course/", include("course.urls")),
                 path("module/", include("schoolmodule.urls")),
                 path("participant/", include("participant.urls")),

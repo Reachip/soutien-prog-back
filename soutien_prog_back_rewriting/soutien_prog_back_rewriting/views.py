@@ -1,8 +1,14 @@
+import datetime
+
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework.serializers import Serializer
+from rest_framework.views import APIView
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView
 from rest_framework_simplejwt.authentication import JWTAuthentication
+
+from rest_framework.response import Response
+from .permissions import IsAuthenticatedWithJWTInCookie
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -22,9 +28,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
+
 class CustomTokenVerifySerializer(Serializer):
     def validate(self, attrs):
-        request = self.context['request']
+        request = self.context["request"]
         token = request.COOKIES.get("soutienprogtokenaccess")
 
         if token is None:
@@ -34,9 +41,19 @@ class CustomTokenVerifySerializer(Serializer):
         return {}
 
 
+class LogoutWithCookie(APIView):
+    def post(self, request):
+        response = Response({})
+        response.set_cookie(
+            "soutienprogtokenaccess", "", expires=datetime.datetime(1970, 1, 1)
+        )
+
+        return response
+
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
+
 class TokenVerifyViewWithCookie(TokenVerifyView):
     serializer_class = CustomTokenVerifySerializer
-
