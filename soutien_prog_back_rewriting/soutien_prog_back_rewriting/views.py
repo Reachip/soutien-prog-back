@@ -28,7 +28,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
-
 class CustomTokenVerifySerializer(Serializer):
     def validate(self, attrs):
         request = self.context["request"]
@@ -46,6 +45,10 @@ class LogoutWithCookie(APIView):
         response = Response({})
         response.set_cookie(
             "soutienprogtokenaccess", "", expires=datetime.datetime(1970, 1, 1)
+        )
+        
+        response.set_cookie(
+            "soutienprogtokenrefresh", "", expires=datetime.datetime(1970, 1, 1)
         )
 
         return response
