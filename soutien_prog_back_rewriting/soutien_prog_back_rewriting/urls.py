@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
@@ -24,20 +26,24 @@ from .views import (
     LogoutWithCookie,
 )
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path(
-        "api/",
-        include(
-            [
-                path("auth/", CustomTokenObtainPairView().as_view()),
-                path("refresh/", jwt_views.TokenRefreshView().as_view()),
-                path("verify/", TokenVerifyViewWithCookie().as_view()),
-                path("logout/", LogoutWithCookie().as_view()),
-                path("course/", include("course.urls")),
-                path("module/", include("schoolmodule.urls")),
-                path("participant/", include("participant.urls")),
-            ]
-        ),
-    ),
+urls = [
+    path("auth/", CustomTokenObtainPairView().as_view()),
+    path("refresh/", jwt_views.TokenRefreshView().as_view()),
+    path("verify/", TokenVerifyViewWithCookie().as_view()),
+    path("logout/", LogoutWithCookie().as_view()),
+    path("course/", include("course.urls")),
+    path("module/", include("schoolmodule.urls")),
+    path("participant/", include("participant.urls")),
 ]
+
+if os.environ.get("USE_NGINX") == 1:
+    urlpatterns = [
+        path("admin/", admin.site.urls),
+        *urls  
+    ]
+
+else:
+    urlpatterns = [
+        path("admin/", admin.site.urls),
+        path("api/", include(urls))
+    ]
