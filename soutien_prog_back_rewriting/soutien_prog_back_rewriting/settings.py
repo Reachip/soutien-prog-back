@@ -188,4 +188,9 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
 }
 
+SIMPLE_JWT = {
+    'SIGNING_KEY': os.environ["DJANGO_SECRET_KEY"],
+    'ALGORITHM': 'HS256'
+}
+
 django_heroku.settings(locals())
