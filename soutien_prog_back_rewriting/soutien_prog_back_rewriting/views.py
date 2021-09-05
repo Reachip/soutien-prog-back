@@ -1,5 +1,5 @@
 import datetime
-
+import os
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework.serializers import Serializer
@@ -9,6 +9,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView
 from rest_framework.generics import get_object_or_404
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from jwt import decode
 from rest_framework import serializers
 from rest_framework.response import Response
 
@@ -19,7 +20,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserView(APIView):
     def get(self, request, *args, **kwargs):
-        instance = get_object_or_404(get_user_model(), pk=1)
+        jwt = decode(request.COOKIES["soutienprogtokenaccess"], os.environ['DJANGO_SECRET_KEY'], 'HS256')
+        instance = get_object_or_404(get_user_model(), username=jwt["username"])
         return Response(UserSerializer(instance).data)
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
