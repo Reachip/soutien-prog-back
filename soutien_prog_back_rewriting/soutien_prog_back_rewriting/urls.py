@@ -24,9 +24,11 @@ from .views import (
     CustomTokenObtainPairView,
     TokenVerifyViewWithCookie,
     LogoutWithCookie,
+    UserView
 )
 
 urls = [
+    path("user/", UserView().as_view()),
     path("auth/", CustomTokenObtainPairView().as_view()),
     path("refresh/", jwt_views.TokenRefreshView().as_view()),
     path("verify/", TokenVerifyViewWithCookie().as_view()),
