@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 import django_heroku
+import time
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ["DJANGO_DEBUG"] == 1 else False
+DEBUG = True
 
 # Application definition
 
@@ -156,9 +158,9 @@ else:
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "fr-fr"
+LANGUAGE_CODE = "fr-FR"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = time.tzname[0]
 
 USE_I18N = True
 
